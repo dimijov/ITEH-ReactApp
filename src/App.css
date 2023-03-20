@@ -41,8 +41,12 @@
 }
 
 .card img {
-  height: 300px;
+  height: 250px;
   width: 300px;
+}
+
+.card img:hover {
+  transform: scale(1.2);
 }
 
 .cardNamePrice {
