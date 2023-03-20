@@ -4,6 +4,7 @@ import Items from "./components/Items";
 import { Cart } from "./components/Cart";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ContactPage from "./components/ContactPage";
 
 function App() {
   //let cartNum = 0;
@@ -55,13 +56,15 @@ return (
           <Routes>
                <Route
                     path="/"
-                    element={
-                         <Items products={products} addItem={addItem} />
-                    }
+                    element={ <Items products={products} addItem={addItem} /> }
                />
                <Route
                     path="/cart"
                     element={<Cart products={cartItems} />}
+               />
+               <Route 
+                    path="/contact" 
+                    element={<ContactPage />}
                />
           </Routes>
      </BrowserRouter>

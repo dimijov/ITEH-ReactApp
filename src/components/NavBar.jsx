@@ -10,6 +10,7 @@ function NavBar({ cartNum }) {
                     <img className="logoNavBar" src={navLogo} alt="logoNav" />
                     <Link to="/">Shop Now</Link>
                     <Link to="/cart">Cart</Link>
+                    <Link to="/contact">Contact</Link>
                     <div className="cart">
                          {" "}
                          <FiShoppingCart />
