@@ -1,12 +1,15 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Items from "./components/Items";
+import { Cart } from "./components/Cart";
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   //let cartNum = 0;
-  const [cartNum, addInCart] = useState(0);
-  const products = [
+  const [cartNum, increaseCartNum] = useState(0);
+     const [cartItems, addToCart] = useState([]);
+     const [products] = useState([
        {
             id: 1,
             name: "COOL case",
@@ -28,17 +31,41 @@ function App() {
             image: "https://csgocases.com/uploads/gallery/oryginal/48894adc6076c00817b7e3bf09605dce9fce1600.png",
             amount: 0,
        },
-  ];
-  function addItem(name) {
-       console.log("Dodat proizvod: " + name);
-       addInCart(cartNum + 1);
-       console.log(cartNum);
-  }
-  return (
-    <div className="App">
-         <NavBar cartNum={cartNum} />
-         <Items products={products} addItem={addItem} />
-    </div>
+  ]);
+
+  function refreshCart() {
+     let newItems = products.filter((prod) => prod.amount > 0);
+     addToCart(newItems);
+}
+function addItem(name, id) {
+     console.log("Dodat proizvod: " + name);
+     increaseCartNum(cartNum + 1);
+     // console.log(cartNum);
+     products.forEach((prod) => {
+          if (prod.id === id) {
+               prod.amount++;
+          }
+     });
+     refreshCart();
+}
+
+return (
+     <BrowserRouter className="App">
+          <NavBar cartNum={cartNum} />
+          <Routes>
+               <Route
+                    path="/"
+                    element={
+                         <Items products={products} addItem={addItem} />
+                    }
+               />
+               <Route
+                    path="/cart"
+                    element={<Cart products={cartItems} />}
+               />
+          </Routes>
+     </BrowserRouter>
 );
 }
+
 export default App;
